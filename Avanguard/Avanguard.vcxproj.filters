@@ -44,6 +44,18 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{f34b9d0b-a530-485c-99f4-43186d66e9ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project Files\AvanguardDefence\APC Filter">
+      <UniqueIdentifier>{25174eae-1070-4aa0-9ce8-50b58e857e0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project Files\AvanguardDefence\Timered Checkings">
+      <UniqueIdentifier>{cbe3a482-dc4c-434f-896e-e55a6971684e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project Files\AvanguardDefence\Java Bindings">
+      <UniqueIdentifier>{3791905e-cf6e-4dfe-a435-2517cd62d719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project Files\AvanguardDefence\Java Bindings\JNI">
+      <UniqueIdentifier>{96ceaee4-18ba-48f2-9bbd-3c6908f2e9bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Avanguard.cpp">
@@ -87,6 +99,18 @@
     </ClCompile>
     <ClCompile Include="AvanguardDefence\ContextsFilter.cpp">
       <Filter>Project Files\AvanguardDefence\Contexts Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="AvanguardDefence\ApcFilter.cpp">
+      <Filter>Project Files\AvanguardDefence\APC Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="AvanguardDefence\ThreatsHandler.cpp">
+      <Filter>Project Files\AvanguardDefence</Filter>
+    </ClCompile>
+    <ClCompile Include="AvanguardDefence\TimeredCheckings.cpp">
+      <Filter>Project Files\AvanguardDefence\Timered Checkings</Filter>
+    </ClCompile>
+    <ClCompile Include="AvanguardDefence\JavaBindings.cpp">
+      <Filter>Project Files\AvanguardDefence\Java Bindings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,10 +165,44 @@
     <ClInclude Include="AvanguardDefence\ContextsFilter.h">
       <Filter>Project Files\AvanguardDefence\Contexts Filter</Filter>
     </ClInclude>
+    <ClInclude Include="AvanguardDefence\ApcFilter.h">
+      <Filter>Project Files\AvanguardDefence\APC Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="AvanguardDefence\ThreatsHandler.h">
+      <Filter>Project Files\AvanguardDefence</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="AvanguardDefence\TimeredCheckings.h">
+      <Filter>Project Files\AvanguardDefence\Timered Checkings</Filter>
+    </ClInclude>
+    <ClInclude Include="JNI\jni.h">
+      <Filter>Project Files\AvanguardDefence\Java Bindings\JNI</Filter>
+    </ClInclude>
+    <ClInclude Include="JNI\jni_md.h">
+      <Filter>Project Files\AvanguardDefence\Java Bindings\JNI</Filter>
+    </ClInclude>
+    <ClInclude Include="AvanguardDefence\JavaBindings.h">
+      <Filter>Project Files\AvanguardDefence\Java Bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="AvnApi\ThreatTypes.h">
+      <Filter>Project Files\AvnApi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="SupportedOS.manifest">
       <Filter>Resources</Filter>
     </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="AvanguardDefence\ApcStub.asm">
+      <Filter>Project Files\AvanguardDefence\APC Filter</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Avanguard.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

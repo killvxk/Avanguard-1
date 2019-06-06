@@ -19,7 +19,9 @@
 #include "./AvanguardDefence/WindowsHooksFilter.h"
 #include "./AvanguardDefence/MemoryFilter.h"
 #include "./AvanguardDefence/ContextsFilter.h"
-
+#include "./AvanguardDefence/ApcFilter.h"
+#include "./AvanguardDefence/TimeredCheckings.h"
+#include "./AvanguardDefence/ThreatsHandler.h"
 #include "./AvanguardDefence/Logger.h"
 
 #include <HookLib.h>
@@ -29,6 +31,11 @@
 #pragma comment(lib, "Zydis.lib")
 #pragma comment(lib, "HookLib.lib")
 #pragma comment(lib, "t1ha-static.lib")
+
+static Notifier::THREAT_DECISION CALLBACK ThreatNotifier(Notifier::THREAT_INFO* Info)
+{
+    return Notifier::tdBlockOrIgnore;
+}
 
 static VOID AvnInitialize()
 {
@@ -55,14 +62,14 @@ static VOID AvnInitialize()
         Log(L"[x] Sfc initialization error!");
 #endif
 
-    if (DllFilter::EnableDllFilter())
+    if (DllFilter::EnableDllFilter(FALSE))
         Log(L"[v] Dll filter enabled!");
     else
         Log(L"[x] Dll filter initialization error!");
 #endif
 
 #ifdef FEATURE_MEMORY_FILTER
-    if (MemoryFilter::EnableMemoryFilter())
+    if (MemoryFilter::EnableMemoryFilter(FALSE))
         Log(L"[v] Memory filter enabled!");
     else
         Log(L"[x] Memory filter initialization error!");
@@ -75,6 +82,30 @@ static VOID AvnInitialize()
         Log(L"[x] Contexts filter initialization error!");
 #endif
 
+#ifdef FEATURE_APC_FILTER
+    if (ApcFilter::EnableApcFilter())
+        Log(L"[v] APC filter enabled!");
+    else
+        Log(L"[x] APC filter initialization error!");
+#endif
+
+#ifdef FEATURE_DLL_FILTER
+    DllFilter::CollectModulesInfo();
+#endif
+
+#ifdef FEATURE_MEMORY_FILTER
+    MemoryFilter::CollectMemoryInfo();
+#endif
+
+#ifdef FEATURE_TIMERED_CHECKINGS
+    if (TimeredCheckings::EnableTimeredCheckings())
+        Log(L"[v] Timered checkings enabled!");
+    else
+        Log(L"[x] Timered checkings initialization error!");
+#endif
+
+    Notifier::Subscribe(ThreatNotifier);
+
     AvnGlobals.Flags.IsAvnInitialized = TRUE;
     Log(L"[v] Avn initialized!");
 }
@@ -86,6 +117,14 @@ static VOID AvnStartDefence()
 
 static VOID AvnStopDefence()
 {
+#ifdef FEATURE_TIMERED_CHECKINGS
+    TimeredCheckings::DisableTimeredCheckings();
+#endif
+
+#ifdef FEATURE_APC_FILTER
+    ApcFilter::DisableApcFilter();
+#endif
+
 #ifdef FEATURE_CONTEXTS_FILTER
     ContextsFilter::DisableContextsFilter();
 #endif
